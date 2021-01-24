@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import { Card, Container, Dimmer, Loader } from 'semantic-ui-react';
+import { Card, Container, Dimmer, Input, Loader } from 'semantic-ui-react';
 import HeaderIcon from './components/HeaderIcon';
 import WasteItemCard from './components/WasteItemCard';
 
 const queryClient = new QueryClient();
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  }
+
+  const keywordMatchesSearchTerm = (keyword: string) => {
+    if (keyword.indexOf(searchTerm) !== -1) {
+      return true;
+    }
+    return false;
+  }
+
   const extractStringFromHTML = (str: string) => {
     const span = document.createElement("span");
     span.innerHTML = str;
@@ -14,7 +27,7 @@ function App() {
   }
 
   const fetchWasteItemsGrid = async () => {
-    const res = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=50");
+    const res = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=10");
     return res.json();
   }
 
@@ -55,7 +68,7 @@ function App() {
             <Container>
               <Card.Group itemsPerRow={5}>
                 {wasteItemList.map((wasteItem: WasteItem) => (
-                  <WasteItemCard key={wasteItem.itemName} wasteItem={wasteItem} />
+                  keywordMatchesSearchTerm(wasteItem.itemName) ? <WasteItemCard key={wasteItem.itemName} wasteItem={wasteItem} /> : null
                 ))}
               </Card.Group>
             </Container>
@@ -70,7 +83,16 @@ function App() {
         <div className="header">
           <HeaderIcon />
         </div>
-        <WasteItemsGrid />
+        <div>
+          <Input
+            placeholder="Search for for household item"
+            value={searchTerm}
+            onChange={onSearchChange}
+          />
+        </div>
+        <div>
+          <WasteItemsGrid />
+        </div>
       </div>
     </QueryClientProvider>
   );

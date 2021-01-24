@@ -9,11 +9,3 @@ type WasteItem = {
     binType: string;
     description: string;
 }
-
-enum BinTypes {
-    BLUE_BIN = "Blue Bin",
-    GARBAGE = "Garbage",
-    METAL_ITEMS = "Metal Items",
-    DEPOT = "Depot",
-    ORGANIC = "HHW",
-}

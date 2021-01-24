@@ -3,7 +3,7 @@ import { Button, Card, Image } from 'semantic-ui-react';
 import BlueBin from '../pictures/bluebin.png';
 import GarbageBin from '../pictures/garbagebin.png';
 import GreenBin from '../pictures/greenbin.png';
-import YardBin from '../pictures/yardwaste.png';
+import HazardBin from '../pictures/hazardbin.png';
 
 interface WasteItemProps {
     key: string;
@@ -11,42 +11,46 @@ interface WasteItemProps {
 }
 
 enum BinTypes {
-    BLUE_BIN = "Blue Bin",
     GARBAGE = "Garbage",
+    OVERSIZE = "Oversize",
     METAL_ITEMS = "Metal Items",
+    ELECTRONIC = "Electronic Waste",
+    BLUE_BIN = "Blue Bin",
+    YARD_WASTE = "Yard Waste",
     DEPOT = "Depot",
-    ORGANIC = "HHW",
+    CHRISTMAS = "Christmas Tree",
+    HAZARD = "HHW",
+    NOT_ACCEPTED = "Not Accepted"
 }
 
-const translateBinType = (binType: string) => {
-    if (binType === BinTypes.BLUE_BIN) {
-        return BinTypes.BLUE_BIN;
-    } else if (binType === BinTypes.DEPOT) {
-        return BinTypes.DEPOT;
-    } else if (binType === BinTypes.GARBAGE) {
+const consolidateBinTypes = (binType: string) => {
+    if (binType === BinTypes.GARBAGE || binType === BinTypes.OVERSIZE || binType === BinTypes.METAL_ITEMS || binType === BinTypes.ELECTRONIC) {
         return BinTypes.GARBAGE;
-    } else if (binType === BinTypes.METAL_ITEMS) {
-        return BinTypes.METAL_ITEMS;
+    } else if (binType === BinTypes.YARD_WASTE || binType === BinTypes.DEPOT || binType === BinTypes.CHRISTMAS) {
+        return BinTypes.YARD_WASTE;
+    } else if (binType === BinTypes.BLUE_BIN) {
+        return BinTypes.BLUE_BIN;
     } else {
-        return BinTypes.ORGANIC;
+        return BinTypes.HAZARD;
     }
 }
 
-const getBinIcon = (binType: string) => {
-    if (binType === BinTypes.BLUE_BIN) {
-        return BlueBin;
-    } else if (binType === BinTypes.GARBAGE) {
+const getBinIcon = (binType: BinTypes) => {
+    if (binType === BinTypes.GARBAGE) {
         return GarbageBin;
-    } else if (binType === BinTypes.ORGANIC) {
+    } else if (binType === BinTypes.BLUE_BIN) {
+        return BlueBin;
+    } else if (binType === BinTypes.YARD_WASTE) {
         return GreenBin;
-    } else {
-        return YardBin;
+    } else if (binType === BinTypes.HAZARD) {
+        return HazardBin;
     }
+    return null;
 }
 
 const WasteItemCard: React.FC<WasteItemProps> = ({ wasteItem }) => {
     const itemName: string = wasteItem.itemName;
-    const binType: string = wasteItem.binType;
+    const binType: BinTypes = consolidateBinTypes(wasteItem.binType);
     const description: string = wasteItem.description;
 
     return (
@@ -56,18 +60,20 @@ const WasteItemCard: React.FC<WasteItemProps> = ({ wasteItem }) => {
                     <span className="itemName">{itemName}</span>
                 </Card.Header>
                 <Card.Meta>
-                    <Card.Description>
-                        <Image src={getBinIcon(binType)} alt={"Waste bin"} size={"mini"} />
-                    </Card.Description>
-                    <Card.Description>
-                        {binType}
-                    </Card.Description>
+                    <div className="binType">
+                        <Card.Description>
+                            <Image src={getBinIcon(binType)} alt={"Waste bin"} size={"mini"} />
+                        </Card.Description>
+                        <Card.Description>
+                            {binType}
+                        </Card.Description>
+                    </div>
                     <Card.Description>
                         {description}
                     </Card.Description>
                 </Card.Meta>
             </Card.Content>
-            <Button>Select</Button>
+            <Button>Add to waste room</Button>
         </Card>
     );
 }
