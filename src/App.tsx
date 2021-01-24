@@ -1,13 +1,53 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import { Card, Container, Dimmer, Input, Loader } from 'semantic-ui-react';
+import { Card, Container, Dimmer, Input, Loader, Menu } from 'semantic-ui-react';
 import HeaderIcon from './components/HeaderIcon';
 import WasteItemCard from './components/WasteItemCard';
+
+enum Menus {
+  SEARCH = "Search items",
+  VIEW = "View bins"
+}
 
 const queryClient = new QueryClient();
 
 function App() {
+  const [activeMenu, setActiveMenu] = useState(Menus.SEARCH);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchMenuClick = (e: SyntheticEvent<HTMLElement>) => {
+    setActiveMenu(Menus.SEARCH);
+  }
+
+  const handleViewMenuClick = (e: SyntheticEvent<HTMLElement>) => {
+    setActiveMenu(Menus.VIEW);
+
+  }
+
+  const MenuPages: React.FC = () => {
+    if (activeMenu === Menus.SEARCH) {
+      return (
+        <div>
+          <div className="searchBar">
+            <Input
+              className="searchInput"
+              placeholder="Search for for household item"
+              value={searchTerm}
+              onChange={onSearchChange}
+            />
+          </div>
+          <div>
+            <WasteItemsGrid />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div>
+
+      </div>
+    );
+  }
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -26,13 +66,13 @@ function App() {
     return span.innerText;
   }
 
-  const fetchWasteItemsGrid = async () => {
+  const fetchWasteItems = async () => {
     const res = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=10");
     return res.json();
   }
 
   const WasteItemsGrid = () => {
-    const { data, status } = useQuery("WasteItemsGrid", fetchWasteItemsGrid);
+    const { data, status } = useQuery("WasteItemsGrid", fetchWasteItems);
     console.log(data);
 
     const wasteItemList: WasteItem[] = [];
@@ -79,19 +119,26 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
+      <div className="container">
         <div className="header">
           <HeaderIcon />
         </div>
         <div>
-          <Input
-            placeholder="Search for for household item"
-            value={searchTerm}
-            onChange={onSearchChange}
-          />
+          <Menu secondary className="menu">
+            <Menu.Item
+              name={Menus.SEARCH}
+              active={activeMenu === Menus.SEARCH}
+              onClick={handleSearchMenuClick}
+            />
+            <Menu.Item
+              name={Menus.VIEW}
+              active={activeMenu === Menus.VIEW}
+              onClick={handleViewMenuClick}
+            />
+          </Menu>
         </div>
         <div>
-          <WasteItemsGrid />
+          <MenuPages />
         </div>
       </div>
     </QueryClientProvider>

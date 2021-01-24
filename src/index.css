@@ -1,7 +1,24 @@
 .header {
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.searchInput {
+  width: 250px;
 }
 
 .itemName {
