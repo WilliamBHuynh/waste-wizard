@@ -3,3 +3,13 @@
   justify-content: center;
   padding: 30px;
 }
+
+.itemName {
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+}
+
+/* .grid {
+
+} */
