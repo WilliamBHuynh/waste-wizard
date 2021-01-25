@@ -73,7 +73,7 @@ const WasteItemCard: React.FC<WasteItemProps> = ({ wasteItem }) => {
                     </Card.Description>
                 </Card.Meta>
             </Card.Content>
-            <Button>Add to waste room</Button>
+            <Button binType={binType} itemName={itemName} onClick={wasteItem.handleOnClick}>Add to waste room</Button>
         </Card>
     );
 }

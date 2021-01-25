@@ -31,3 +31,7 @@
   display: flex;
   justify-content: center;
 }
+
+.wasteRoom {
+  padding: 20px;
+}
