@@ -80,7 +80,7 @@ function App() {
   }
 
   const fetchWasteItems = async () => {
-    const res = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000");
+    const res = await fetch("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=100");
     return res.json();
   }
 
