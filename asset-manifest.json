@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/waste-wizard/static/css/main.9df46752.chunk.css",
-    "main.js": "/waste-wizard/static/js/main.19212e1f.chunk.js",
-    "main.js.map": "/waste-wizard/static/js/main.19212e1f.chunk.js.map",
+    "main.js": "/waste-wizard/static/js/main.9a84336d.chunk.js",
+    "main.js.map": "/waste-wizard/static/js/main.9a84336d.chunk.js.map",
     "runtime-main.js": "/waste-wizard/static/js/runtime-main.6d64094a.js",
     "runtime-main.js.map": "/waste-wizard/static/js/runtime-main.6d64094a.js.map",
     "static/css/2.7e866096.chunk.css": "/waste-wizard/static/css/2.7e866096.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.7e866096.chunk.css",
     "static/js/2.40891141.chunk.js",
     "static/css/main.9df46752.chunk.css",
-    "static/js/main.19212e1f.chunk.js"
+    "static/js/main.9a84336d.chunk.js"
   ]
 }
