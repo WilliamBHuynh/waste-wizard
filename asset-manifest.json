@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/waste-wizard/static/css/main.9df46752.chunk.css",
+    "main.js": "/waste-wizard/static/js/main.19212e1f.chunk.js",
+    "main.js.map": "/waste-wizard/static/js/main.19212e1f.chunk.js.map",
+    "runtime-main.js": "/waste-wizard/static/js/runtime-main.6d64094a.js",
+    "runtime-main.js.map": "/waste-wizard/static/js/runtime-main.6d64094a.js.map",
+    "static/css/2.7e866096.chunk.css": "/waste-wizard/static/css/2.7e866096.chunk.css",
+    "static/js/2.40891141.chunk.js": "/waste-wizard/static/js/2.40891141.chunk.js",
+    "static/js/2.40891141.chunk.js.map": "/waste-wizard/static/js/2.40891141.chunk.js.map",
+    "index.html": "/waste-wizard/index.html",
+    "static/css/2.7e866096.chunk.css.map": "/waste-wizard/static/css/2.7e866096.chunk.css.map",
+    "static/css/main.9df46752.chunk.css.map": "/waste-wizard/static/css/main.9df46752.chunk.css.map",
+    "static/js/2.40891141.chunk.js.LICENSE.txt": "/waste-wizard/static/js/2.40891141.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/waste-wizard/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/hazardbin.3513b0b1.png": "/waste-wizard/static/media/hazardbin.3513b0b1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6d64094a.js",
+    "static/css/2.7e866096.chunk.css",
+    "static/js/2.40891141.chunk.js",
+    "static/css/main.9df46752.chunk.css",
+    "static/js/main.19212e1f.chunk.js"
+  ]
+}
